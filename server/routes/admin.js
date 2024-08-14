@@ -1,16 +1,14 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/adminAuth");
+const User = require('../models/user'); 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET_ADMIN;
 const jwt = require("jsonwebtoken");
 
-// Admin Routes
 router.post('/signup', async (req, res) => {
-    // Implement admin signup logic
     const username = req.body.username;
     const password = req.body.password;
 
-    // check if a user with this username already exists
     await Admin.create({ 
         username: username,
         password: password
@@ -21,10 +19,9 @@ router.post('/signup', async (req, res) => {
     })
 });
 
-router.post('/signin', async (req, res) => {
+router.post('/login', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    console.log(JWT_SECRET);
 
     const user = await User.find({
         username,
@@ -45,35 +42,42 @@ router.post('/signin', async (req, res) => {
     }
 });
 
-
-router.post('/courses', adminMiddleware, async (req, res) => {
-    // Implement course creation logic
-    const title = req.body.title;
-    const description = req.body.description;
-    const imageLink = req.body.imageLink;
-    const price = req.body.price;
-    // zod
-    const newCourse = await Course.create({
-        title,
-        description,
-        imageLink,
-        price
-    })
-
-    res.json({
-        message: 'Course created successfully', courseId: newCourse._id
-    })
+router.get('/users', adminMiddleware, async (req, res) => {
+    try {
+        const users = await User.find().select('-password'); 
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
-router.get('/courses', adminMiddleware, async (req, res) => {
-    // Implement fetching all courses logic
-    const response = await Course.find({});
-
-    res.json({
-        courses: response
-    })
-
+router.delete('/users/:id',adminMiddleware, async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        res.status(200).json({ message: 'User deleted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
+router.get('/posts', async (req, res) => {
+    try {
+        const posts = await BlogPost.find().populate('author', 'username');
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.delete('/posts/:id', async (req, res) => {
+    try {
+        const post = await BlogPost.findByIdAndDelete(req.params.id);
+        if (!post) return res.status(404).json({ message: 'Blog post not found' });
+        res.status(200).json({ message: 'Blog post deleted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 module.exports = router;

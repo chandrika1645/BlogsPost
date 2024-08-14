@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/userAuth');
 const zod = require('zod');
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET_USER;
 
 const schema = zod.object({
     username: zod.string().min(5, { message: "Username is too small" }),

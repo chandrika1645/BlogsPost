@@ -51,7 +51,7 @@ router.put('/:id', userMiddleware, async (req, res) => {
             return res.status(404).json({ message: 'Blog post not found' });
         }
 
-        if (post.author._id.toString() !== req.user._id.toString()) {
+        if (post.author._id.toString() !== req.userId.toString()) {
             return res.status(403).json({ message: 'Not authorized to edit this post' });
         }
 
@@ -67,7 +67,7 @@ router.put('/:id', userMiddleware, async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', userMiddleware, async (req, res) => {
     try {
         const { id } = req.params; 
         const post = await BlogPost.findById(id).populate('author');
@@ -76,10 +76,10 @@ router.delete('/:id', async (req, res) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        if (post.author._id.toString() !== req.user._id.toString()) {
+        if (post.author._id.toString() !== req.userId.toString()) {
             return res.status(403).json({ message: 'Not authorized to delete this post' });
         }
-        
+
         await BlogPost.findByIdAndDelete(id);
 
         res.status(200).json({ message: 'Post deleted' });

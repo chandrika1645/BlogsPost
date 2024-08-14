@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET_ADMIN;
 
-// Middleware for handling auth
 function adminMiddleware(req, res, next) {
     const token = req.headers.authorization; 
     const words = token.split(" "); 
