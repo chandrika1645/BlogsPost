@@ -25,6 +25,10 @@
     flex: 1;
     max-width: 300px;
     text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+.dashboard-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-card h3 {
@@ -150,7 +154,7 @@
 /* Post Card Css */
 .post-card {
     background-color: #f4f4f4;
-    padding: 20px;
+    padding: 10px 20px 10px 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -168,7 +172,20 @@
 .post-card h3 {
     color: #007bff;
 }
-
+.post-title{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #007bff !important;
+}
+.authorName{
+    display: flex;
+    justify-content: flex-end;
+    color: #007bff !important;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
 .post-card p {
     color: #555;
 }

@@ -1,21 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CreatePost from './../Post/CreatePost.js';
+import CreatePost from './../CreatePost/CreatePost.js';
+import Posts from './../Posts/Posts.js';
 import './Dashboard.css';
 
 const Dashboard = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [editingPost, setEditingPost] = useState(null);
+    const [filter, setFilter] = useState('');
+    const [showMyPosts, setShowMyPosts] = useState(false);
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (!token) {
-            // If no token is found, redirect to login page
             navigate('/login');
+        } else {
+            fetchUserName();
+            fetchPosts();
         }
     }, [navigate]);
+
+    useEffect(() => {
+        let filtered = posts;
+
+        if (filter) {
+            filtered = filtered.filter(post => post.authorname.toLowerCase().includes(filter.toLowerCase()));
+        }
+
+        if (showMyPosts) {
+            filtered = filtered.filter(post => post.authorname === userName);
+        }
+
+        setFilteredPosts(filtered);
+    }, [filter, showMyPosts, posts, userName]);
+
+    const fetchUserName = async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch('http://localhost:8080/user', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setUserName(data.userName); // Adjust according to the actual field name
+            } else {
+                console.error('Failed to fetch user name:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching user name:', error);
+        }
+    };
+
+    const fetchPosts = async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch('http://localhost:8080/blogs', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setPosts(data);
+                setFilteredPosts(data);
+            } else {
+                console.error('Failed to fetch posts:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
+    };
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
@@ -23,19 +83,39 @@ const Dashboard = () => {
 
     const addPost = (newPost) => {
         setPosts([...posts, newPost]);
+        setFilteredPosts([...filteredPosts, newPost]);
         togglePopup();
     };
 
     const editPost = (updatedPost) => {
-        setPosts(posts.map(post => (post.id === updatedPost.id ? updatedPost : post)));
+        const updatedPosts = posts.map(post => (post.id === updatedPost.id ? updatedPost : post));
+        setPosts(updatedPosts);
+        setFilteredPosts(updatedPosts);
         setEditingPost(null);
         togglePopup();
     };
 
-    const deletePost = (postId) => {
+    const deletePost = async (postId) => {
         const confirmed = window.confirm('Are you sure you want to delete this post?');
         if (confirmed) {
-            setPosts(posts.filter(post => post.id !== postId));
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`http://localhost:8080/blogs/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (response.ok) {
+                    setPosts(posts.filter(post => post.id !== postId));
+                    setFilteredPosts(filteredPosts.filter(post => post.id !== postId));
+                } else {
+                    const data = await response.json();
+                    console.error('Failed to delete post:', data.message);
+                }
+            } catch (error) {
+                console.error('Error deleting post:', error);
+            }
         }
     };
 
@@ -66,6 +146,26 @@ const Dashboard = () => {
                 </div>
             </div>
 
+            <div className="filter-section">
+                <label htmlFor="authorFilter">Filter by Author:</label>
+                <input
+                    type="text"
+                    id="authorFilter"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    placeholder="Enter author name"
+                />
+                <div>
+                    <input
+                        type="checkbox"
+                        id="myPostsFilter"
+                        checked={showMyPosts}
+                        onChange={() => setShowMyPosts(!showMyPosts)}
+                    />
+                    <label htmlFor="myPostsFilter">Show My Posts Only</label>
+                </div>
+            </div>
+
             {showPopup && (
                 <div className="popup">
                     <div className="popup-inner">
@@ -79,23 +179,11 @@ const Dashboard = () => {
                 </div>
             )}
 
-            <div className="posts-container">
-                <h2>Your Posts</h2>
-                {posts.length === 0 ? (
-                    <p>No posts yet. Start writing your first post!</p>
-                ) : (
-                    posts.map((post) => (
-                        <div key={post.id} className="post-card">
-                            <div className="post-card-controls">
-                                <button className="edit-button" title="Edit Post" onClick={() => handleEditClick(post)}>✎</button>
-                                <button className="edit-button" title="Delete Post" onClick={() => deletePost(post.id)}>🗑️</button>
-                            </div>
-                            <h3>{post.title}</h3>
-                            <p>{post.content}</p>
-                        </div>
-                    ))
-                )}
-            </div>
+            <Posts 
+                posts={filteredPosts}
+                onEditClick={handleEditClick} 
+                onDeleteClick={deletePost} 
+            />
         </div>
     );
 };

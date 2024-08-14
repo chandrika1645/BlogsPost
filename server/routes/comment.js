@@ -3,7 +3,7 @@ const router = Router();
 const Comment = require('../models/comment');
 const userMiddleware = require('../middleware/userAuth');
 
-router.post('/:postId', async (req, res) => {
+router.post('/:postId', userMiddleware, async (req, res) => {
     try {
         const { postId } = req.params; 
         const { content } = req.body;

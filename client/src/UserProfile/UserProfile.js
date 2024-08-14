@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserProfile.css';
 
 const UserProfile = () => {
-  const [username, setUsername] = useState('JohnDoe');
+  const [username, setUsername] = useState('');
   const [photo, setPhoto] = useState('default-photo.jpg');
-  const [dob, setDob] = useState('1990-01-01');
-  const [number, setNumber] = useState('+91 1234567890');
-  const [email, setEmail] = useState('john.doe@example.com');
-  const [authorName, setAuthorName] = useState('John Doe');
+  const [dob, setDob] = useState('');
+  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [authorName, setAuthorName] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:8080/user/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setUsername(data.username);
+          setDob(data.dob || '');
+          setNumber(data.number || '');
+          setEmail(data.email);
+          setAuthorName(data.authorname);
+        } else {
+          console.error('Failed to fetch user profile:', data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, [navigate]);
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -28,6 +60,7 @@ const UserProfile = () => {
     }
 
     alert('Profile updated successfully!');
+    // Implement the logic to update the profile on the server
   };
 
   const handlePasswordUpdate = () => {
@@ -39,6 +72,7 @@ const UserProfile = () => {
     alert('Password updated successfully!');
     setNewPassword('');
     setConfirmPassword('');
+    // Implement the logic to update the password on the server
   };
 
   const handleLogoutUser = () => {
