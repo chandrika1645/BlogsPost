@@ -41,7 +41,7 @@ const Dashboard = () => {
     const fetchUserName = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:8080/user', {
+            const response = await fetch('http://localhost:8080/user/profile', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },

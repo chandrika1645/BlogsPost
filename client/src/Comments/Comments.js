@@ -3,16 +3,24 @@ import React, { useState, useEffect } from 'react';
 const Comments = ({ postId }) => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState({ content: '' });
-    const [authorName, setAuthorName] = useState('');
 
     useEffect(() => {
         fetchComments();
-        fetchUserProfile(); // Fetch user profile to get the author's name
     }, [postId]);
 
     const fetchComments = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/comments/${postId}`);
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                console.error('No token found in local storage');
+                return;
+            }
+
+            const response = await fetch(`http://localhost:8080/comments/${postId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
             const data = await response.json();
             if (response.ok) {
                 setComments(data.comments);
@@ -21,25 +29,6 @@ const Comments = ({ postId }) => {
             }
         } catch (error) {
             console.error('Error fetching comments:', error);
-        }
-    };
-
-    const fetchUserProfile = async () => {
-        try {
-            const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:8080/profile', { // Adjust the URL if necessary
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-            const data = await response.json();
-            if (response.ok) {
-                setAuthorName(data.username); // Adjust according to the actual field in your response
-            } else {
-                console.error('Failed to fetch user profile:', data.message);
-            }
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
         }
     };
 
@@ -54,16 +43,18 @@ const Comments = ({ postId }) => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('authToken');
+            if (!token) {
+                console.error('No token found in local storage');
+                return;
+            }
+
             const response = await fetch(`http://localhost:8080/comments/${postId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ 
-                    content: newComment.content, 
-                    author: authorName // Include authorName in request body
-                }),
+                body: JSON.stringify({ content: newComment.content }),
             });
             const data = await response.json();
             if (response.ok) {

@@ -22,11 +22,7 @@ const Posts = ({ posts, onEditClick, onDeleteClick }) => {
                             <button
                                 className="delete-button"
                                 title="Delete Post"
-                                onClick={() => {
-                                    if (window.confirm('Are you sure you want to delete this post?')) {
-                                        onDeleteClick(post.id);
-                                    }
-                                }}
+                                onClick={() => {onDeleteClick(post.id)}}
                             >
                                 🗑️
                             </button>
