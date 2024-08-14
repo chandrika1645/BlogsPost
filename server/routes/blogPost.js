@@ -21,10 +21,19 @@ router.post('/', userMiddleware, async (req, res) => {
     }
 });
 
-router.get('/', userMiddleware, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const posts = await BlogPost.find();
-        res.status(200).json({ posts });
+        const posts = await BlogPost.find()
+            .populate('author', 'authorname email'); 
+
+        const formattedPosts = posts.map(post => ({
+            title: post.title,
+            content: post.content,
+            authorname: post.author ? post.author.authorname : 'Unknown' ,
+            email: post.author ? post.author.email : 'Unknown'
+        }));
+
+        res.json(formattedPosts);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

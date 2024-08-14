@@ -19,7 +19,7 @@ app.use("/user", userRouter)
 app.use('/comments', commentRouter);
 app.use('/blogs', blogRouter );
 
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
