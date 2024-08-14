@@ -8,9 +8,9 @@ const CommentSchema = new mongoose.Schema({
         required: true
     },
     author: {
-        type: String,
-        required: true,
-        minlength: 3
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', 
+        required: true
     },
     content: {
         type: String,

@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
             .populate('author', 'authorname email'); 
 
         const formattedPosts = posts.map(post => ({
+            id: post._id,
             title: post.title,
             content: post.content,
             authorname: post.author ? post.author.authorname : 'Unknown' ,
@@ -39,31 +40,48 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', userMiddleware, async (req, res) => {
-    try {
-        const post = await BlogPost.findById(req.params.id);
-        if (!post) return res.status(404).json({ message: 'Post not found' });
-        res.status(200).json({ post });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
 router.put('/:id', userMiddleware, async (req, res) => {
     try {
+        const { id } = req.params;
         const { title, content } = req.body;
-        const updatedPost = await BlogPost.findByIdAndUpdate(req.params.id, { title, content, updated_at: Date.now() }, { new: true });
-        if (!updatedPost) return res.status(404).json({ message: 'Post not found' });
-        res.status(200).json({ message: 'Post updated', post: updatedPost });
+        
+        const post = await BlogPost.findById(id).populate('author');
+
+        if (!post) {
+            return res.status(404).json({ message: 'Blog post not found' });
+        }
+
+        if (post.author._id.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ message: 'Not authorized to edit this post' });
+        }
+
+        post.title = title || post.title;
+        post.content = content || post.content;
+        post.updated_at = new Date();
+
+        await post.save();
+
+        res.json({ message: 'Blog post updated successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-router.delete('/:id', userMiddleware, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const deletedPost = await BlogPost.findByIdAndDelete(req.params.id);
-        if (!deletedPost) return res.status(404).json({ message: 'Post not found' });
+        const { id } = req.params; 
+        const post = await BlogPost.findById(id).populate('author');
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        if (post.author._id.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ message: 'Not authorized to delete this post' });
+        }
+        
+        await BlogPost.findByIdAndDelete(id);
+
         res.status(200).json({ message: 'Post deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });

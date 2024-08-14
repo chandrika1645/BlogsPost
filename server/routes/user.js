@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid password" });
         }
-        const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: '24h' });
         res.status(200).json({ token });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -73,7 +73,42 @@ router.get('/profile', userMiddleware, async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.status(200).json(user);
+        const formattedUser = {
+            username: user.username,
+            email: user.email,
+            authorname: user.authorname
+        };
+
+        res.status(200).json(formattedUser);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.put('/profile', userMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId; 
+        let user = await User.findById(userId).select('-password'); 
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const { username, email, authorname } = req.body;
+
+        if (username) user.username = username;
+        if (email) user.email = email;
+        if (authorname) user.authorname = authorname;
+
+        user = await user.save();
+
+        const updatedUser = {
+            username: user.username,
+            email: user.email,
+            authorname: user.authorname
+        };
+
+        res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
