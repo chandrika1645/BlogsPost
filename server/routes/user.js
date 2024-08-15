@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
         if (!user) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        const truthy = await bcrypt.compare(password, user.password)
+
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid password" });
@@ -59,6 +59,28 @@ router.post('/login', async (req, res) => {
         res.status(200).json({ token });
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+});
+
+router.put('/update-password', async (req, res) => {
+    try {
+        const { username, currentPassword, newPassword } = req.body;
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const isMatch = await user.comparePassword(currentPassword);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Current password is incorrect' });
+        }
+        user.password = newPassword;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
 

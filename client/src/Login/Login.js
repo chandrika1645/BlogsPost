@@ -36,47 +36,48 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='login-page'>    
-    <div className="login-container">
-      <div className="login-content">
-        <div className="login-image">
-          <img src="https://img.freepik.com/free-vector/blog-post-concept-illustration_114360-28016.jpg?w=740&t=st=1723685977~exp=1723686577~hmac=d2878a615b03082b306102e475b32f95c14f14991312972a64782372c7abaf69" alt="Login Visual" />
-        </div>
-        <div className="login-form-container">
-          <h2>Login</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit" className="login-button">Login</button>
-          </form>
-          <p className="signup-link">
-            Don't have an account? <Link to="/signup">Sign up</Link>
-          </p>
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-content">
+          <div className="login-image">
+            <p className="main-heading">Blogpost</p>
+            <img src="https://img.freepik.com/free-vector/blog-post-concept-illustration_114360-28016.jpg?w=740&t=st=1723685977~exp=1723686577~hmac=d2878a615b03082b306102e475b32f95c14f14991312972a64782372c7abaf69" alt="Login Visual" />
+          </div>
+          <div className="login-form-container">
+            <h2 className="sub-heading">Login</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="login-button">Login</button>
+            </form>
+            <p className="signup-link">
+              Don't have an account? <Link to="/signup">Sign up</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  );
+  );  
 };
 
 export default LoginPage;

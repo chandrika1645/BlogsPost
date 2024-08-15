@@ -25,7 +25,7 @@ router.get('/:postId', userMiddleware, async (req, res) => {
     try {
         const { postId } = req.params; 
 
-        const comments = await Comment.find({ post_id: postId }).populate('author', 'username'); 
+        const comments = await Comment.find({ post_id: postId }).populate('author', 'username').exec(); 
 
         res.status(200).json({ comments });
     } catch (error) {

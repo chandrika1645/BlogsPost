@@ -1,12 +1,10 @@
-/* Import a good font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Dancing+Script:wght@700&display=swap');
 
-/* General styling for the page */
 .login-page {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: #fdeff4; /* Pastel pink background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +17,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 0 5%; /* Add padding to leave space on both sides */
+  padding: 0 5%; 
   box-sizing: border-box;
 }
 
@@ -30,37 +28,47 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
-  max-width: 1400px; /* Increase the width of the container */
+  max-width: 1000px; 
   width: 100%;
-  margin: 0 auto; /* Center the container */
+  height: auto;
+  margin: 0 auto;
+  padding: 20px; 
 }
 
-/* Image container */
 .login-image {
   flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  max-width: 600px;
+  max-width: 500px; 
+  margin-right: 20px; 
 }
 
 .login-image img {
-  width: 100%; /* Ensure the image takes up the full width of its container */
+  width: 100%; 
   height: auto;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
 }
 
-/* Form container */
 .login-form-container {
   flex: 1;
   padding: 50px;
   max-width: 360px;
 }
 
-h2 {
+.main-heading {
+  font-family: 'Dancing Script', cursive;
+  font-size: 162px; 
+  font-weight: 700; 
+  color: black;
+  margin-bottom: 20px; 
+  text-align: center;
+}
+
+.sub-heading {
+  font-size: 24px;
   font-weight: 500;
-  margin-bottom: 20px;
+  color: black;
   text-align: center;
 }
 
@@ -106,11 +114,15 @@ input {
   font-size: 16px;
 }
 
-/* Responsive styling */
 @media (max-width: 768px) {
   .login-content {
     flex-direction: column;
     max-width: 400px;
+  }
+
+  .login-image {
+    max-width: 100%; 
+    margin-right: 0; 
   }
 
   .login-image img {

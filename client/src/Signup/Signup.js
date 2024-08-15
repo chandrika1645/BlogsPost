@@ -60,68 +60,70 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
+      <h1 className="main-heading">Blogpost</h1> 
+      <h2 className="sub-heading">Sign Up</h2> 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
+        <div className="form-group">
           <input
             type="text"
             id="username"
             name="username"
             value={formData.username}
             onChange={handleChange}
+            placeholder="Username"
             required
           />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="form-group">
           <input
             type="email"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Email"
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="form-group">
           <input
             type="password"
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
             required
           />
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        <div className="form-group">
           <input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
+            placeholder="Confirm Password"
             required
           />
         </div>
-        <div>
-          <label htmlFor="authorName">Author Name</label>
+        <div className="form-group">
           <input
             type="text"
             id="authorName"
             name="authorName"
             value={formData.authorName}
             onChange={handleChange}
+            placeholder="Author Name"
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
       <ToastContainer />
     </div>
   );
+  
 };
 
 export default SignUp;
