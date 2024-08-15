@@ -18,7 +18,7 @@ const PostDetail = () => {
 
     return (
         <div className="post-detail-container">
-            <button className="close-button" onClick={handleClose}>Close</button>
+            <button className="close-button" onClick={handleClose}>Go Back</button>
             <div className="post-detail-content">
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>

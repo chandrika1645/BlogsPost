@@ -12,7 +12,6 @@ const Posts = ({ posts, onEditClick, onDeleteClick }) => {
 
     return (
         <div className="posts-container">
-            <h2>Explore Blogs</h2>
             {posts.length === 0 ? (
                 <p>No posts yet. Start writing your first post!</p>
             ) : (
@@ -35,7 +34,7 @@ const Posts = ({ posts, onEditClick, onDeleteClick }) => {
                             </button>
                         </div>
                         <h3>{post.title}</h3>
-                        <p>{post.content}</p>
+                        <p className='post-content'>{post.content}</p>
                         <p className='authorName'>{`@${post.authorname}`}</p>
                     </div>
                 ))

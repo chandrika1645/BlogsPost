@@ -1,10 +1,10 @@
-/* Navbar.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap');
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px 40px;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -16,14 +16,11 @@
 }
 
 .navbar-logo {
-    font-size: 24px;
+    font-size: 28px; /* Increased font size */
     color: #3897f0;
     text-decoration: none;
-}
-
-.navbar-logo a {
-    text-decoration: none;
-    color: inherit;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* Thicker font weight */
 }
 
 .navbar-links {
@@ -40,12 +37,19 @@
     font-size: 16px;
     cursor: pointer;
     transition: color 0.3s ease;
-}
-
-.navbar-button:hover {
-    color: #3897f0;
+    padding: 10px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
 }
 
 .navbar-button span {
     margin-left: 8px;
+}
+
+.navbar-button:hover {
+    color: #007bff;
+}
+
+.navbar-button svg {
+    color: #007bff; /* Color for icons */
 }

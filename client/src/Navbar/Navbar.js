@@ -1,9 +1,7 @@
-// Navbar.js
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaPen, FaUserCircle, FaBook } from 'react-icons/fa';
 import './Navbar.css';
-import { FaPlus, FaUserCog } from 'react-icons/fa';
 
 const Navbar = ({ onCreatePostClick }) => {
     return (
@@ -13,12 +11,16 @@ const Navbar = ({ onCreatePostClick }) => {
             </div>
             <div className="navbar-links">
                 <button className="navbar-button" onClick={onCreatePostClick}>
-                    <FaPlus size={20} />
-                    <span>Create Post</span>
+                <FaPen size={20} />
+                <span>Write Blog</span>
                 </button>
                 <Link to="/profile" className="navbar-button">
-                    <FaUserCog size={20} />
-                    <span>User Settings</span>
+                <FaUserCircle size={20} />
+                <span>My Profile</span>
+                </Link>
+                <Link to="/my-blogs" className="navbar-button">
+                <FaBook size={20} />
+                <span>My Blogs</span>
                 </Link>
             </div>
         </nav>

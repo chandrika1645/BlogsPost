@@ -73,8 +73,7 @@ const Comments = ({ postId }) => {
             <ul>
                 {comments.map((comment) => (
                     <li key={comment._id}>
-                        <p><strong>{comment.author.username}</strong>: {comment.content}</p> {/* Adjust based on actual response */}
-                        <small>{new Date(comment.created_at).toLocaleString()}</small>
+                        <p><strong>{comment.author.username}</strong>: {comment.content}</p> 
                     </li>
                 ))}
             </ul>

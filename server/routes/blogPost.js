@@ -15,11 +15,14 @@ router.post('/', userMiddleware, async (req, res) => {
 
         const newPost = new BlogPost({ title, content, author: authorId });
         await newPost.save();
-        res.status(201).json({ message: 'Blog post created', post: newPost });
+        const postWithUser = await BlogPost.findById(newPost._id).populate('author', 'username').exec();
+
+        res.status(201).json({ message: 'Blog post created', post: postWithUser });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 router.get('/', async (req, res) => {
     try {

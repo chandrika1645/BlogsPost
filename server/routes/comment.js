@@ -15,7 +15,9 @@ router.post('/:postId', userMiddleware, async (req, res) => {
         });
 
         await newComment.save();
-        res.status(201).json({ message: 'Comment added', comment: newComment });
+        const commentWithUser = await Comment.findById(newComment._id).populate('author', 'username').exec();
+
+        res.status(201).json({ message: 'Comment added', comment: commentWithUser });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

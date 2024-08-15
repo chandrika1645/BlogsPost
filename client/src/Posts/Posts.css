@@ -1,9 +1,11 @@
-/* Posts.css */
-
 .posts-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
+}
+
+h2 {
+    color: white;
 }
 
 .post-card {
@@ -13,6 +15,43 @@
     background-color: #fff;
     position: relative;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize; /* Ensures the title is in title case */
+}
+
+.post-card h3 {
+    text-transform: capitalize; /* Ensure titles are always in title case */
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.post-card-content {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    max-height: 100px; /* Limit the height of the content */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+.post-content{
+    height: 22vh;
+    overflow-y: auto;
+}
+
+.more-link {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    padding-left: 5px;
 }
 
 .post-card-controls {
@@ -41,4 +80,25 @@
 
 .icon {
     font-size: 20px;
+}
+
+.authorName {
+    color: #555;
+    font-style: italic;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+    .posts-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 posts in a row for smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .posts-container {
+        grid-template-columns: 1fr; /* 1 post in a row for mobile screens */
+    }
 }

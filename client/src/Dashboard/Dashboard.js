@@ -143,7 +143,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 )}
-
+                <h2>Explore Blogs</h2>
                 <Posts 
                     posts={filteredPosts}
                     onEditClick={handleEditClick} 
