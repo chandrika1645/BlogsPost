@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -36,37 +36,47 @@ const Login = () => {
   };
 
   return (
-    <div className="logo-page">
-      <div className="logo-container">
-        <img src="logo-placeholder.png" alt="BlogNest Logo" className="logo" />
-        {/* Replace 'logo-placeholder.png' with the actual path to your logo */}
-        <h2>BlogNest</h2>
+    <div className='login-page'>    
+    <div className="login-container">
+      <div className="login-content">
+        <div className="login-image">
+          <img src="https://img.freepik.com/free-vector/blog-post-concept-illustration_114360-28016.jpg?w=740&t=st=1723685977~exp=1723686577~hmac=d2878a615b03082b306102e475b32f95c14f14991312972a64782372c7abaf69" alt="Login Visual" />
+        </div>
+        <div className="login-form-container">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="login-button">Login</button>
+          </form>
+          <p className="signup-link">
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </p>
+        </div>
       </div>
-      <div className="login-container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-      </div>
+    </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

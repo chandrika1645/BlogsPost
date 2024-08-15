@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Make sure to import the toast library
 import './UserProfile.css';
 
 const UserProfile = () => {
@@ -11,7 +12,7 @@ const UserProfile = () => {
   const [authorName, setAuthorName] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,15 +32,13 @@ const UserProfile = () => {
         const data = await response.json();
         if (response.ok) {
           setUsername(data.username);
-          setDob(data.dob || '');
-          setNumber(data.number || '');
           setEmail(data.email);
           setAuthorName(data.authorname);
         } else {
-          console.error('Failed to fetch user profile:', data.message);
+          toast.error(`Failed to fetch user profile: ${data.message}`);
         }
       } catch (error) {
-        console.error('Error fetching user profile:', error);
+        toast.error('Error fetching user profile:', error.message);
       }
     };
 
@@ -49,30 +48,58 @@ const UserProfile = () => {
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPhoto(URL.createObjectURL(file));
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPhoto(reader.result); // This will be a base64 string
+        };
+        reader.readAsDataURL(file);
     }
-  };
+};
 
-  const handleProfileUpdate = () => {
-    if (newPassword !== confirmPassword) {
-      alert('Passwords do not match!');
+  const handleProfileUpdate = async () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
       return;
     }
 
-    alert('Profile updated successfully!');
-    // Implement the logic to update the profile on the server
+    try {
+      const response = await fetch('http://localhost:8080/user/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          authorname: authorName,
+          photo,
+          dob,
+          number
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Profile updated successfully!');
+      } else {
+        toast.error(`Failed to update profile: ${data.message}`);
+      }
+    } catch (error) {
+      toast.error('Error updating profile:', error.message);
+    }
   };
 
-  const handlePasswordUpdate = () => {
+  const handlePasswordUpdate = async () => {
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match!');
+      toast.error('Passwords do not match!');
       return;
     }
 
-    alert('Password updated successfully!');
+    // Implement the logic to update the password on the server if needed
+    toast.success('Password updated successfully!');
     setNewPassword('');
     setConfirmPassword('');
-    // Implement the logic to update the password on the server
   };
 
   const handleLogoutUser = () => {
