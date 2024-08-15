@@ -56,6 +56,7 @@ const CreatePost = ({ addPost, editPost, existingPost }) => {
         });
         const data = await response.json();
         if (response.ok) {
+          data.post.authorname = data.post.author.username;
           addPost(data.post);
         } else {
           console.error('Failed to create post:', data.message);
