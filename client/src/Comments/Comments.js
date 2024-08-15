@@ -70,7 +70,6 @@ const Comments = ({ postId }) => {
 
     return (
         <div className="comments-section">
-            <h3>Comments</h3>
             <ul>
                 {comments.map((comment) => (
                     <li key={comment._id}>

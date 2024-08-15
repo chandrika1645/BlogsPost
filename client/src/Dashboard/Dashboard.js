@@ -1,7 +1,10 @@
+// Dashboard.js
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreatePost from './../CreatePost/CreatePost.js';
 import Posts from './../Posts/Posts.js';
+import Navbar from './../Navbar/Navbar.js';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -9,7 +12,6 @@ const Dashboard = () => {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [editingPost, setEditingPost] = useState(null);
-    const [filter, setFilter] = useState('');
     const [showMyPosts, setShowMyPosts] = useState(false);
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
@@ -27,16 +29,12 @@ const Dashboard = () => {
     useEffect(() => {
         let filtered = posts;
 
-        if (filter) {
-            filtered = filtered.filter(post => post.authorname.toLowerCase().includes(filter.toLowerCase()));
-        }
-
         if (showMyPosts) {
             filtered = filtered.filter(post => post.authorname === userName);
         }
 
         setFilteredPosts(filtered);
-    }, [filter, showMyPosts, posts, userName]);
+    }, [showMyPosts, posts, userName]);
 
     const fetchUserName = async () => {
         try {
@@ -124,66 +122,34 @@ const Dashboard = () => {
         togglePopup();
     };
 
-    const handleProfileNavigation = () => {
-        navigate('/profile');
+    const handleCreatePostClick = () => {
+        setEditingPost(null);
+        togglePopup();
     };
 
     return (
         <div className="dashboard-container">
-            <h1>Welcome to Your Dashboard</h1>
-
-            <div className="dashboard-cards">
-                <div className="dashboard-card">
-                    <h3>Create New Blog Post</h3>
-                    <p>Start writing a new blog post and share your thoughts with the world.</p>
-                    <button onClick={() => { setEditingPost(null); togglePopup(); }}>Create Post</button>
-                </div>
-
-                <div className="dashboard-card">
-                    <h3>User Settings</h3>
-                    <p>Manage your account settings and personal information.</p>
-                    <button onClick={handleProfileNavigation}>Settings</button>
-                </div>
-            </div>
-
-            <div className="filter-section">
-                <label htmlFor="authorFilter">Filter by Author:</label>
-                <input
-                    type="text"
-                    id="authorFilter"
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
-                    placeholder="Enter author name"
-                />
-                <div>
-                    <input
-                        type="checkbox"
-                        id="myPostsFilter"
-                        checked={showMyPosts}
-                        onChange={() => setShowMyPosts(!showMyPosts)}
-                    />
-                    <label htmlFor="myPostsFilter">Show My Posts Only</label>
-                </div>
-            </div>
-
-            {showPopup && (
-                <div className="popup">
-                    <div className="popup-inner">
-                        <CreatePost 
-                            addPost={addPost} 
-                            editPost={editPost} 
-                            existingPost={editingPost} 
-                        />
-                        <button className="close-button" onClick={togglePopup}>Close</button>
+            <Navbar onCreatePostClick={handleCreatePostClick} />
+            <div className="dashboard-content">
+                {showPopup && (
+                    <div className="popup-overlay">
+                        <div className="popup">
+                            <CreatePost 
+                                addPost={addPost} 
+                                editPost={editPost} 
+                                existingPost={editingPost} 
+                            />
+                            <button className="close-button" onClick={togglePopup}>Close</button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            <Posts 
-                posts={filteredPosts}
-                onEditClick={handleEditClick} 
-                onDeleteClick={deletePost} 
-            />
+                <Posts 
+                    posts={filteredPosts}
+                    onEditClick={handleEditClick} 
+                    onDeleteClick={deletePost} 
+                />
+            </div>
         </div>
     );
 };

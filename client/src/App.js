@@ -4,6 +4,7 @@ import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import Dashboard from './Dashboard/Dashboard';
 import UserProfile from './UserProfile/UserProfile';
+import PostDetail from './PostDetails/PostDetail.js';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/posts/:postId" element={<PostDetail />} />
         </Routes>
       </div>
     </Router>

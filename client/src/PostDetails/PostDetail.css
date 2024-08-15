@@ -1,0 +1,133 @@
+.post-detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+}
+
+.close-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #ff4c4c;
+}
+
+.post-detail-content {
+    flex: 3;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+}
+
+.post-detail-content h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+.post-detail-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    white-space: pre-wrap;
+}
+
+.post-detail-comments {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-detail-comments h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.comments-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.comment .author {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.comment .timestamp {
+    font-size: 12px;
+    color: #999;
+}
+
+.comment-input-container {
+    margin-top: 20px;
+}
+
+.comment-input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.comment-input-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-input-container button:hover {
+    background-color: #307bf0;
+}
