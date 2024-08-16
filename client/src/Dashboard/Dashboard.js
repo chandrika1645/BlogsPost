@@ -1,5 +1,3 @@
-// Dashboard.js
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreatePost from './../CreatePost/CreatePost.js';
@@ -46,7 +44,7 @@ const Dashboard = () => {
             });
             const data = await response.json();
             if (response.ok) {
-                setUserName(data.userName); // Adjust according to the actual field name
+                setUserName(data.userName); 
             } else {
                 console.error('Failed to fetch user name:', data.message);
             }
@@ -84,41 +82,14 @@ const Dashboard = () => {
         setFilteredPosts([...filteredPosts, newPost]);
         togglePopup();
     };
+    
+    
 
     const editPost = (updatedPost) => {
         const updatedPosts = posts.map(post => (post.id === updatedPost.id ? updatedPost : post));
         setPosts(updatedPosts);
         setFilteredPosts(updatedPosts);
         setEditingPost(null);
-        togglePopup();
-    };
-
-    const deletePost = async (postId) => {
-        const confirmed = window.confirm('Are you sure you want to delete this post?');
-        if (confirmed) {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch(`http://localhost:8080/blogs/${postId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                if (response.ok) {
-                    setPosts(posts.filter(post => post.id !== postId));
-                    setFilteredPosts(filteredPosts.filter(post => post.id !== postId));
-                } else {
-                    const data = await response.json();
-                    console.error('Failed to delete post:', data.message);
-                }
-            } catch (error) {
-                console.error('Error deleting post:', error);
-            }
-        }
-    };
-
-    const handleEditClick = (post) => {
-        setEditingPost(post);
         togglePopup();
     };
 
@@ -146,8 +117,6 @@ const Dashboard = () => {
                 <h2>Explore Blogs</h2>
                 <Posts 
                     posts={filteredPosts}
-                    onEditClick={handleEditClick} 
-                    onDeleteClick={deletePost} 
                 />
             </div>
         </div>

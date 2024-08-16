@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const User = require('../models/user'); 
+const BlogPost = require('../models/blogPost')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userMiddleware = require('../middleware/userAuth');
@@ -135,5 +136,23 @@ router.put('/profile', userMiddleware, async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+router.get('/blogs', userMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId; 
+
+        const user = await User.findById(userId).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const blogs = await BlogPost.find({ author: userId });
+
+        res.status(200).json(blogs);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 module.exports = router

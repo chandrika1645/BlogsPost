@@ -5,9 +5,6 @@ import './UserProfile.css';
 
 const UserProfile = () => {
   const [username, setUsername] = useState('');
-  const [photo, setPhoto] = useState('default-photo.jpg');
-  const [dob, setDob] = useState('');
-  const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -45,17 +42,6 @@ const UserProfile = () => {
     fetchUserProfile();
   }, [navigate]);
 
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPhoto(reader.result); // This will be a base64 string
-        };
-        reader.readAsDataURL(file);
-    }
-};
-
   const handleProfileUpdate = async () => {
     const token = localStorage.getItem('authToken');
     if (!token) {
@@ -73,10 +59,7 @@ const UserProfile = () => {
         body: JSON.stringify({
           username,
           email,
-          authorname: authorName,
-          photo,
-          dob,
-          number
+          authorname: authorName  
         }),
       });
       const data = await response.json();
@@ -109,71 +92,40 @@ const UserProfile = () => {
 
   return (
     <div className="profile-container">
-      <h1>User Profile</h1>
-      <div className="profile-photo">
-        <img src={photo} alt="Profile" />
-        <input type="file" onChange={handlePhotoChange} />
-      </div>
+      <h1 className="profile-title">User Profile</h1>
       <div className="profile-info">
         <div className="profile-field">
-          <label>Username:</label>
+          <label className="field-label">Username:</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="field-input"
           />
         </div>
         <div className="profile-field">
-          <label>Author Name:</label>
+          <label className="field-label">Author Name:</label>
           <input
             type="text"
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
+            className="field-input"
           />
         </div>
         <div className="profile-field">
-          <label>Email:</label>
+          <label className="field-label">Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="field-input"
           />
         </div>
-        <div className="profile-field">
-          <label>Date of Birth:</label>
-          <input
-            type="date"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
+        
+        <div className="button-group">
+          <button onClick={handleProfileUpdate} className="update-button">Update Profile</button>
+          <button onClick={handleLogoutUser} className="logout-button">Logout</button>
         </div>
-        <div className="profile-field">
-          <label>Number:</label>
-          <input
-            type="text"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-          />
-        </div>
-        <button onClick={handleProfileUpdate}>Update Profile</button>
-        <div className="profile-field">
-          <label>New Password:</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        <div className="profile-field">
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <button onClick={handlePasswordUpdate}>Update Password</button>
-        <button onClick={handleLogoutUser}>Logout</button>
       </div>
     </div>
   );

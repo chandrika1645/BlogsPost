@@ -1,7 +1,9 @@
 .posts-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 50px;
+    width: 70%;
+    margin: 0 auto;
 }
 
 h2 {
@@ -12,35 +14,29 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    background-color: #fff;
+    background-color: aliceblue;
     position: relative;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
     height: 300px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    text-transform: capitalize; /* Ensures the title is in title case */
+    text-transform: capitalize;
 }
 
 .post-card h3 {
-    text-transform: capitalize; /* Ensure titles are always in title case */
+    text-transform: capitalize;
     margin-bottom: 10px;
     font-size: 18px;
 }
 
-.post-card-content {
+.post-content {
     flex-grow: 1;
     margin-bottom: 10px;
-    max-height: 100px; /* Limit the height of the content */
     overflow: hidden;
-    text-overflow: ellipsis;
-    position: relative;
-}
-.post-content{
-    height: 22vh;
-    overflow-y: auto;
+    height: 186px; 
 }
 
 .more-link {
@@ -48,10 +44,11 @@ h2 {
     cursor: pointer;
     font-weight: bold;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 10px;
+    right: 10px;
     background-color: white;
     padding-left: 5px;
+    z-index: 1;
 }
 
 .post-card-controls {
@@ -60,6 +57,7 @@ h2 {
     position: absolute;
     top: 10px;
     right: 10px;
+    z-index: 1; 
 }
 
 .edit-button, .delete-button {
@@ -71,11 +69,11 @@ h2 {
 }
 
 .edit-button:hover {
-    color: #4caf50; /* Green color for edit */
+    color: #4caf50;
 }
 
 .delete-button:hover {
-    color: #f44336; /* Red color for delete */
+    color: #f44336;
 }
 
 .icon {
@@ -83,22 +81,25 @@ h2 {
 }
 
 .authorName {
+    margin-top: 20px;
     color: #555;
     font-style: italic;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: -14px; 
+    right: 2px; 
+    z-index: 1; 
+    background: aliceblue; 
+    padding: 0 5px;
 }
 
-/* Responsive Design */
 @media (max-width: 1000px) {
     .posts-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 posts in a row for smaller screens */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
     .posts-container {
-        grid-template-columns: 1fr; /* 1 post in a row for mobile screens */
+        grid-template-columns: 1fr;
     }
 }

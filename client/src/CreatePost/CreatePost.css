@@ -1,9 +1,15 @@
+/* CreatePost.css */
+
 .create-post-container {
     background-color: #fff;
     padding: 20px;
     margin-bottom: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    position: relative;
 }
 
 .create-post-container h2 {
@@ -15,6 +21,7 @@
 .create-post-container form {
     display: flex;
     flex-direction: column;
+    flex: 1; 
 }
 
 .create-post-container div {
@@ -28,10 +35,9 @@
     color: #555;
 }
 
-.create-post-container input,
-.create-post-container textarea {
+.create-post-container input {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 2px solid black;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
@@ -39,26 +45,4 @@
     background-color: #f9f9f9;
 }
 
-.create-post-container textarea {
-    resize: vertical;
-    min-height: 100px;
-}
 
-.create-post-container button {
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.create-post-container button:hover {
-    background-color: #0056b3;
-}
-
-.create-post-container button:active {
-    background-color: #004494;
-}

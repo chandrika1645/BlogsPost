@@ -81,13 +81,32 @@ const Comments = ({ postId }) => {
                 <div>
                     <label>Comment:</label>
                     <textarea
+                     cols={50}
                         name="content"
                         value={newComment.content}
                         onChange={handleCommentChange}
                         required
                     ></textarea>
                 </div>
-                <button type="submit">Add Comment</button>
+                <button
+                type="submit"
+                style={{
+                    marginTop: "20px",
+                    backgroundColor: '#e0f2f1', 
+                    color: '#00796b',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    transition: 'background-color 0.3s, box-shadow 0.3s',
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#b2dfdb'} 
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#e0f2f1'} 
+                >
+                Add Comment
+                </button>
             </form>
         </div>
     );

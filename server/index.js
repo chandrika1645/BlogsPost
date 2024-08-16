@@ -6,7 +6,7 @@ const app = express();
 const userRouter = require("./routes/user");
 const commentRouter = require("./routes/comment")
 const blogRouter = require("./routes/blogPost")
-
+const errorMiddleware = require('./middleware/errorHandling');
 require('dotenv').config();
 connectDB();
 
@@ -16,8 +16,11 @@ app.use(cors());
 app.use("/user", userRouter)
 app.use('/comments', commentRouter);
 app.use('/blogs', blogRouter );
+app.use(errorMiddleware)
+
 
 const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
