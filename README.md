@@ -7,6 +7,7 @@ BlogsNest is a modern blogging platform built with React.js for the frontend and
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Security](#security)
+- [Screenshots](#screenshots)
 - [Demo Video](#demo-video)
 - [Backend Setup](#backend-setup)
 - [Frontend Setup](#frontend-setup)
@@ -27,6 +28,7 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
 - **Database Integration:** Uses MongoDB for data storage.
 - **Authentication Middleware:** Protects routes and ensures only authenticated users can access certain features.
 - **Environment Variables:** dotenv is used to manage sensitive data like JWT secrets and database connection strings.
+- **Data Validation:** Zod library is used for data validation to ensure consistency and security.
 
 ### Frontend:
 
@@ -36,6 +38,7 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
 - **API Integration:** Axios is used to communicate with the backend for all operations.
 - **State Management:** React Context and react hooks.
 - **Responsive UI:** Mobile-friendly and accessible UI design.
+- **Toast Notifications:** Toast is used for displaying real-time notifications to users.
 
 ## Security
 
@@ -44,9 +47,14 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
 - **CORS Handling:** Implemented to manage cross-origin requests securely.
 - **Middleware Protection:** Routes are secured using authentication middleware.
 
+## Screenshots
+https://github.com/your-repo-name/assets/12345678/example-image.png
+
+
 ## Demo Video
 
-[![Demo Video](https://drive.google.com/file/d/1Olc7exeng-v0PffFOZM5fSq3h0gTAxjA/view?usp=sharing)](https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view?usp=drive_link)
+[[Demo Video](https://github.com/your-repo-name/assets/12345678/example-image.png)](https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view?usp=drive_link)
+
 
 
 ## Backend Setup
@@ -98,11 +106,7 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
    ```sh
    npm install
    ```
-3. Update the API base URL in the Axios client (`api.js`):
-   ```js
-   const API_BASE_URL = "http://localhost:8080";
-   ```
-4. Start the frontend application:
+3. Start the frontend application:
    ```sh
    npm run dev
    ```
