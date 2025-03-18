@@ -77,7 +77,7 @@ BlogsPost is a **feature-rich blogging platform** allowing users to **create, re
 Watch the full demo video of the BlogsPost platform in action!  
 
 <a href="https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view">
-    <img src="https://github.com/chandrika1645/BlogsPost/blob/main/demoVideo.gif" width="500">
+    <img src="https://github.com/chandrika1645/BlogsPost/blob/main/screenshots/demoVideo.gif" width="500">
 </a>
 
 
@@ -175,16 +175,19 @@ The backend is equipped with structured error handling to return appropriate res
 
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework for Node.js
-- **MongoDB** - NoSQL database for storing blog data
+- **MongoDB** - NoSQL database for storing data
 - **JWT Authentication** - Secure authentication
 - **bcrypt** - Password hashing
 - **dotenv** - Environment variable management
+- **Zod** - Data validation 
 
 ### **Frontend:**
 
 - **React.js** - Frontend JavaScript library
 - **Axios** - HTTP client for API requests
 - **React Hooks** - For efficient state management
+- **Axios** - For API communication
+- **Toast** - For notifications
 
 ---
 
