@@ -74,9 +74,13 @@ BlogsPost is a **feature-rich blogging platform** allowing users to **create, re
 
 ## 🎬 **Demo Video**
 
-Watch the full demo video of the BlogsPost platform in action!
+Watch the full demo video of the BlogsPost platform in action!  
 
-[![Demo Video](https://img.youtube.com/vi/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/hqdefault.jpg)](https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view?usp=drive_link)
+<a href="https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view" target="_blank">
+    <img src="https://github.com/chandrika1645/BlogsPost/blob/main/Blognest-ezgif.com-video-to-gif-converter.gif" width="100%">
+</a>
+
+
 
 ---
 
