@@ -7,7 +7,6 @@ BlogsNest is a modern blogging platform built with React.js for the frontend and
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Security](#security)
-- [Screenshots](#screenshots)
 - [Demo Video](#demo-video)
 - [Backend Setup](#backend-setup)
 - [Frontend Setup](#frontend-setup)
@@ -45,7 +44,10 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
 - **CORS Handling:** Implemented to manage cross-origin requests securely.
 - **Middleware Protection:** Routes are secured using authentication middleware.
 
-##
+## Demo Video
+
+[![Demo Video](https://drive.google.com/file/d/1Olc7exeng-v0PffFOZM5fSq3h0gTAxjA/view?usp=sharing)](https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view?usp=drive_link)
+
 
 ## Backend Setup
 
