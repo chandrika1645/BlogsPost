@@ -1,6 +1,6 @@
-# BlogsNest
+# BlogsPost
 
-BlogsNest is a modern blogging platform built with React.js for the frontend and Express.js for the backend, utilizing MongoDB as the database. The system provides full authentication, blog post management, commenting, and a responsive UI for an enhanced user experience.
+BlogsPost is a modern blogging platform built with React.js for the frontend and Express.js for the backend, utilizing MongoDB as the database. The system provides full authentication, blog post management, commenting, and a responsive UI for an enhanced user experience.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ BlogsNest is a modern blogging platform built with React.js for the frontend and
 
 ## Project Overview
 
-BlogsNest is a blogging platform that allows users to create, read, update, and delete blog posts. It supports user authentication using JWT and provides a commenting feature. The backend is built with Express.js and MongoDB, while the frontend is developed using React.js. Axios is used for API communication. The system is designed for security, scalability, and an intuitive user experience.
+BlogsPost is a blogging platform that allows users to create, read, update, and delete blog posts. It supports user authentication using JWT and provides a commenting feature. The backend is built with Express.js and MongoDB, while the frontend is developed using React.js. Axios is used for API communication. The system is designed for security, scalability, and an intuitive user experience.
 
 ## Features
 
@@ -48,9 +48,12 @@ BlogsNest is a blogging platform that allows users to create, read, update, and 
 - **Middleware Protection:** Routes are secured using authentication middleware.
 
 ## Screenshots
-https://github.com/your-repo-name/assets/12345678/example-image.png
-
-
+- **login page**
+https://github.com/chandrika1645/Blogspost/blob/main/screenshots/login-page.png
+- **Sign-up page**
+https://github.com/chandrika1645/BlogsPost/blob/main/screenshots/sign-up-page.png
+- **Toast notifications**
+https://github.com/chandrika1645/BlogsPost/blob/main/screenshots/toast-notifications.png
 ## Demo Video
 
 [[Demo Video](https://github.com/your-repo-name/assets/12345678/example-image.png)](https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view?usp=drive_link)
@@ -68,7 +71,7 @@ https://github.com/your-repo-name/assets/12345678/example-image.png
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/chandrika1645/BlogsNest.git
+   git clone https://github.com/chandrika1645/BlogsPost.git
    ```
 2. Navigate to the backend directory:
    ```sh
@@ -142,5 +145,5 @@ The backend includes structured error handling for different scenarios, returnin
 - Axios
 - React hooks
 
-BlogsNest is designed to be a secure and scalable blogging platform, ensuring an intuitive experience for both readers and content creators.
+BlogsPost is designed to be a secure and scalable blogging platform, ensuring an intuitive experience for both readers and content creators.
 
