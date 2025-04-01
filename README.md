@@ -193,6 +193,3 @@ The backend is equipped with structured error handling to return appropriate res
 
 **BlogsPost** is designed to be a **secure**, **scalable**, and **responsive** blogging platform with an **intuitive user experience** for all.
 
----
-
-Feel free to personalize the README further, especially with images, badges, and any other interactive content you'd like to include!
