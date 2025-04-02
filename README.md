@@ -62,13 +62,13 @@ BlogsPost is a **feature-rich blogging platform** allowing users to **create, re
 ## 📸 **Screenshots**
 
 - **Login Page:**
- <img src="https://raw.githubusercontent.com/chandrika1645/Blogspost/main/screenshots/login-page.png" width="500">
+ <img src="https://raw.githubusercontent.com/chandrika1645/Blogspost/main/screenshots/login-page.png" width="700">
   
 - **Sign-Up Page:**
-<img src="https://raw.githubusercontent.com/chandrika1645/BlogsPost/main/screenshots/sign-up-page.png" width="500">
+<img src="https://raw.githubusercontent.com/chandrika1645/BlogsPost/main/screenshots/sign-up-page.png" width="700">
 
 - **Toast Notifications:**
-<img src="https://raw.githubusercontent.com/chandrika1645/Blogspost/main/screenshots/toast-notifications.png" width="500">
+<img src="https://raw.githubusercontent.com/chandrika1645/Blogspost/main/screenshots/toast-notifications.png" width="700">
 
 ---
 
@@ -77,7 +77,7 @@ BlogsPost is a **feature-rich blogging platform** allowing users to **create, re
 Watch the full demo video of the BlogsPost platform in action!  
 
 <a href="https://drive.google.com/file/d/1Wn0wvVGPQLmot5mZghTZQa-cOCbRPeh-/view">
-    <img src="https://github.com/chandrika1645/BlogsPost/blob/main/screenshots/demoVideo.gif" width="500">
+    <img src="https://github.com/chandrika1645/BlogsPost/blob/main/screenshots/demoVideo.gif" width="700">
 </a>
 
 
